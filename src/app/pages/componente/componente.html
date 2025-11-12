@@ -1,2 +1,39 @@
 <h2>Componente Eliseu</h2>
-<app-ibge-cidade></app-ibge-cidade>
+
+
+<div class="container-componente">
+  <div class="selectbox">
+    <app-ibge-cidade
+      [estadoPadrao]="'MG'"
+      (cidadeSelecionadaEmitter)="onCidadeSelecionada($event)">
+    </app-ibge-cidade>
+  </div>
+</div>
+
+<div id="container">
+  <dx-popup
+    [width]="300"
+    [height]="280"
+    [showTitle]="true"
+    title="Cidade (Popup da Página)"
+    [dragEnabled]="false"
+    [hideOnOutsideClick]="true"
+    [showCloseButton]="false"
+    container=".dx-viewport"
+    [(visible)]="popupVisivelPagina" >
+    <dxi-popup-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="closeButtonOptionsPagina" >
+    </dxi-popup-toolbar-item>
+
+    <div *dxTemplate="let data of 'content'">
+      <div *ngIf="cidadeDetalhe"> <p><b>Id:</b> {{ cidadeDetalhe?.id }}</p>
+        <p><b>Nome:</b> {{ cidadeDetalhe?.nome }}</p>
+        <p><b>Estado:</b> {{ cidadeDetalhe.microrregiao.mesorregiao.UF.nome }} ({{ cidadeDetalhe.microrregiao.mesorregiao.UF.sigla }})</p>
+        <p><b>Região:</b> {{ cidadeDetalhe.microrregiao.mesorregiao.UF.regiao.nome }} ({{ cidadeDetalhe.microrregiao.mesorregiao.UF.regiao.sigla }})</p>
+      </div>
+    </div>
+  </dx-popup>
+</div>

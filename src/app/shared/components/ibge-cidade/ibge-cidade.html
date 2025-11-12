@@ -1,40 +1,10 @@
-<div class="container-componente">
-  <div class="selectbox">
-    <dx-select-box label="Estados" width=300px [items]="estados"
-                   valueExpr=sigla displayExpr="nome" (onValueChanged)="onValueChanged($event)">
-    </dx-select-box>
-    <br>
-    <dx-select-box label="Cidades" width=300px [items]="cidades" valueExpr=id displayExpr="nome" (onSelectionChanged)="showInfo($event)">
-    </dx-select-box>
-    <br>
-  </div>
-</div>
-
-<div id="container">
-  <dx-popup
-    [width]="300"
-    [height]="280"
-    [showTitle]="true"
-    title="Cidade"
-    [dragEnabled]="false"
-    [hideOnOutsideClick]="true"
-    [showCloseButton]="false"
-    container=".dx-viewport"
-    [(visible)]="popupVisible"
-  >
-    <dxi-popup-toolbar-item
-      widget="dxButton"
-      toolbar="bottom"
-      location="after"
-      [options]="closeButtonOptions"
-    >
-    </dxi-popup-toolbar-item>
-    <div *dxTemplate="let data of 'content'">
-      <p><b>Id:</b> {{ cidadeSelecionada?.id }}</p>
-      <p><b>Nome:</b> {{ cidadeSelecionada?.nome }}</p>
-      <p><b>Estado:</b> {{ cidadeSelecionada.microrregiao.mesorregiao.UF.nome }} ({{ cidadeSelecionada.microrregiao.mesorregiao.UF.sigla }})</p>
-      <p><b>Região:</b> {{ cidadeSelecionada.microrregiao.mesorregiao.UF.regiao.nome }} ({{ cidadeSelecionada.microrregiao.mesorregiao.UF.regiao.sigla }})</p>
-    </div>
-  </dx-popup>
-</div>
-
+<dx-select-box label="Estados" width=300px [items]="estados"
+               valueExpr=sigla displayExpr="nome"
+               [value]="siglaEstado" (onValueChanged)="onValueChanged($event)">
+</dx-select-box>
+<br>
+<dx-select-box label="Cidades" width=300px [items]="cidades"
+               valueExpr=id displayExpr="nome"
+               (onSelectionChanged)="showInfo($event)">
+</dx-select-box>
+<br>
